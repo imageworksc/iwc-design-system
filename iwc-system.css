@@ -1,0 +1,1063 @@
+/* ==========================================================================
+   ImageWorks Creative — the subpage design system
+   ==========================================================================
+
+   The shared half of every IWC subpage stylesheet. Lifted from the live home
+   page, settled in imageworksc/Custom-Web-Design, and byte-identical inside
+   branding-page, marketing-plans and ai-web-design today.
+
+   HOW TO USE IT
+   Paste this file at the top of a new page's styles.css, then write the
+   page's own block underneath it behind a prefix (bd-, mp-, ai-, …).
+   Do not edit anything above that line in the page. Fix it here and carry it
+   across, or the pages drift apart.
+
+   Carry it WHOLE. The pieces a page has no use for — the process flow, the
+   marquee, the comparison columns — stay in place rather than being pruned
+   piecemeal. Carrying it whole is what keeps it a system.
+
+   Single light theme. No dark mode — the brand commits to one visual world.
+
+   THE FONT
+   The `src` below is a placeholder. Before a page ships, replace it with the
+   real base64 payload so the page makes no network request:
+
+     base64 -w0 fonts/plus-jakarta-sans-latin.woff2
+
+   and paste the result between `base64,` and the closing paren. Or copy the
+   line wholesale out of any shipped page (branding-page/styles.css line 19).
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  /* REPLACE: paste the base64 payload — see THE FONT above */
+  src: url(data:font/woff2;base64,PASTE_PAYLOAD_HERE) format("woff2");
+}
+
+:root {
+  color-scheme: light;
+
+  /* ---- brand, taken verbatim from the home stylesheet ---- */
+  --navy: #143c66;
+  --navy-deep: #0a2c4d;
+  --blue: #1266b5;
+  --blue-bright: #1e6bb0;
+  --green: #80c34a;
+  --green-ink: #5c9a2e;          /* the home's green for text and links */
+  --ink: #1f2b3e;                /* body copy */
+  --muted: #5a6b82;
+  --faint: #7d8ea1;
+  --nav-ink: #3d464d;
+
+  /* ---- surfaces ---- */
+  --white: #ffffff;
+  --band-tint: #f2f5f9;
+  --band-tint-warm: #f1f3f6;
+  --card-top: #ffffff;
+  --card-bottom: #fcfdff;
+  --border: #e3eaf3;
+  --border-soft: #eef2f7;
+  --chip-blue: #c1daff;
+  --chip-green: #eaf6dd;
+  --chip-navy: rgba(24, 73, 125, .14);
+  --tint-green: #eef6e6;
+  --tint-blue: #e5edf7;
+  --danger-soft: #fbe9e9;
+  --danger-ink: #b23b3b;
+  /* Neutral pair for the shortcut column: 5.3:1, so the 10px uppercase tag
+     still clears AA. */
+  --grey-soft: #e8edf4;
+  --grey-ink: #4f5f77;
+
+  /* ---- the CTA band, matching the home's #cta section ---- */
+  --cta-band: linear-gradient(135deg, #1266b5, #0a2c4d);
+
+  /* ---- shape: the home squares its corners at 2px ---- */
+  --r: 2px;
+
+  --shadow-card: 0 1px 3px rgba(20, 40, 80, .08), 0 14px 34px rgba(20, 40, 80, .1);
+  --shadow-flat: 0 1px 3px rgba(20, 40, 80, .07);
+  --shadow-lift: 0 4px 12px rgba(20, 40, 80, .18);
+  --ring: 0 0 0 3px rgba(128, 195, 74, .5), 0 0 0 1px rgba(20, 60, 102, .55);
+
+  /* ---- rhythm ---- */
+  --shell: 1180px;
+  --gutter: clamp(22px, 4vw, 40px);
+  --band-y: clamp(64px, 8vw, 108px);
+  --nav-h: 88px;
+  --measure: 66ch;
+
+  /* ---- type scale ----
+     Anchored on the home's 46px h1 / 44px h2, and held inside the Global UX
+     rules' ranges: desktop body 17–18 and never under 16, H1 42–56,
+     H2 32–42, H3 22–28; mobile body 16–17, H1 30–36, H2 26–32.
+     Two places sit outside them on purpose, each noted where it is set:
+     the hero h1's floor (.hero h1) and the 44px H2 cap (.sec-title). */
+  --step--1: clamp(12.5px, .18vw + 12px, 13.5px);  /* chrome — the skip link, not body copy */
+  --step-0: clamp(16px, .25vw + 15.2px, 17px);     /* body. The floor was 15.5px, under the 16px
+                                                      minimum on a 320–400px phone; the design
+                                                      width still renders the same 17px. */
+  --step-1: clamp(16.5px, .4vw + 15.5px, 18px);    /* .lead, .note, .signals — the 17–18px band */
+  --step-2: clamp(22px, 1.1vw + 18px, 28px);       /* H3. Was 19–23px and unused by any rule;
+                                                      this is the 22–28px the rules ask for, and
+                                                      the size marketing-plans reached on its own. */
+  --step-3: clamp(28px, 2.6vw + 18px, 44px);       /* H2 / .sec-title — past 32px by 538px wide */
+  --step-4: clamp(30px, 3vw + 20px, 56px);         /* H1 for a page whose hero does not set its
+                                                      own. Was 34–46px and unused. */
+
+  --ease: cubic-bezier(.16, .84, .44, 1);
+}
+
+/* --------------------------------------------------------------------------
+   BASE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI',
+               Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--step-0);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* clip, not hidden: hidden would make body a scroll container and break
+     the sticky nav */
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--navy);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.018em;
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+ul, ol, dl, dd { margin: 0; padding: 0; }
+li { list-style: none; }
+figure, blockquote { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+::selection { background: rgba(128, 195, 74, .28); }
+
+:where(a, button, summary, details):focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--r);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: 8px; left: 8px;
+  z-index: 200;
+  transform: translateY(-180%);
+  background: var(--navy);
+  color: #fff;
+  font-size: var(--step--1);
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: var(--r);
+  text-decoration: none;
+  transition: transform .18s var(--ease);
+}
+.skip-to-content:focus-visible { transform: translateY(0); }
+
+/* --------------------------------------------------------------------------
+   LAYOUT
+   -------------------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.band {
+  padding-block: var(--band-y);
+  background: var(--white);
+}
+.band--tint { background: var(--band-tint); }
+.band--tint-b { background: var(--band-tint-warm); }
+/* for sections whose own content already carries plenty of vertical air */
+.band--snug { padding-block: clamp(44px, 4.6vw, 64px); }
+
+/* The closing call to action is the home's #cta band: the same gradient with
+   the same dot field laid over it. */
+.band--cta {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(72px, 8vw, 112px);
+  background: var(--cta-band);
+  color: #fff;
+}
+.band--cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.band--cta > * { position: relative; }
+.band--cta h2,
+.band--cta h3 { color: #fff; }
+
+/* The credibility band takes the home's deep blue field — the same ground it
+   uses for "Why ImageWorks". Re-pointing the semantic tokens is enough for
+   every child to flip; nothing inside needs its own dark variant. */
+.band--deep {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(76px, 8vw, 116px);
+  background: linear-gradient(160deg,
+    #205fa6 0%, #1d569a 28%, #164784 47%,
+    #113659 65%, #0d2748 83%, #0a1c38 100%);
+
+  --heading: #ffffff;
+  --text: rgba(226, 238, 252, .82);
+  --muted: rgba(226, 238, 252, .70);
+  --border: rgba(255, 255, 255, .16);
+  --navy: #ffffff;
+}
+.band--deep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+.band--deep > * { position: relative; }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.stack > * { margin: 0; }
+.w-full { width: 100%; }
+
+/* --------------------------------------------------------------------------
+   TYPE COMPONENTS
+   -------------------------------------------------------------------------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--green-ink);
+}
+.eyebrow::before {
+  content: '';
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  flex: none;
+}
+.band--cta .eyebrow { color: var(--green); }
+
+/* The cap is 44px against the rules' 32–42px H2. It stays: the `--one`
+   variants below hold their run on a single line at measurements taken at
+   44px, and the home sets its own h2 there. Everything from 538px up to the
+   design width is inside the range; only the cap is over, and by 2px. */
+.sec-title {
+  font-size: var(--step-3);
+  letter-spacing: -.018em;
+  max-width: 21ch;
+}
+.sec-title--wide { max-width: 27ch; }
+.sec-title em { font-style: normal; color: var(--green-ink); }
+.band--cta .sec-title em { color: var(--green); }
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.7;
+  max-width: var(--measure);
+  color: var(--muted);
+}
+.lead strong { color: var(--navy); font-weight: 700; }
+.lead em { font-style: italic; }
+
+/* Set to two balanced lines. The run measures 1860px at 18px, so each line
+   lands near 930px — the widened measure gives them room and `balance` evens
+   the break. Below 1024px it returns to the normal reading measure. */
+.lead--two { max-width: var(--measure); }
+
+@media (min-width: 1024px) {
+  .lead--two {
+    max-width: 1000px;
+    text-wrap: balance;
+  }
+}
+
+/* Held on one line at full size. Both runs are well inside the measure — the
+   heading is 791px at 44px and the paragraph 837px at 18px, against 944px of
+   room at this breakpoint — so nothing has to shrink to fit. Below it they
+   wrap at their normal measures. */
+@media (min-width: 1024px) {
+  .sec-title--one,
+  .lead--one,
+  .note--one {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+.band--cta .lead { color: rgba(226, 238, 252, .82); }
+.band--cta .lead strong { color: #fff; }
+
+.note {
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--navy);
+  max-width: var(--measure);
+}
+
+/* --------------------------------------------------------------------------
+   STATEMENT SECTION
+   Every other section on the page is built from cards and grids, so this one
+   earns its weight by being nothing but type.
+   -------------------------------------------------------------------------- */
+/* Claim on the left, argument on the right, a hairline between them. As one
+   long column it left half the band empty and read like a page of notes. */
+.stmt {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: clamp(32px, 4.5vw, 68px);
+}
+/* Heading at the top, link at the foot — the column is anchored at both ends
+   instead of trailing off into white. */
+.stmt-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+.stmt-title {
+  font-size: clamp(30px, 2.6vw + 14px, 46px);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.stmt-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding-left: clamp(24px, 3vw, 46px);
+  border-left: 1px solid var(--border);
+}
+.stmt-lead {
+  font-size: clamp(17px, .55vw + 15px, 20px);
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .stmt { grid-template-columns: 1fr; }
+  .stmt-title { max-width: 18ch; }
+  .stmt-body { padding-left: 0; border-left: 0; }
+}
+
+/* A marker stroke drawn under each promise, one after the next, the first
+   time the section is read. Painted as a background so it survives a line
+   break instead of leaving a floating box behind the text. */
+.hl {
+  color: var(--navy);
+  font-weight: 700;
+  /* the inline box is only about 1.25em tall, so it needs padding below the
+     baseline for the stroke to sit under the text instead of through it */
+  padding: 0 .06em .16em;
+  background-image: linear-gradient(rgba(128, 195, 74, .42), rgba(128, 195, 74, .42));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 .34em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-size .75s var(--ease);
+  transition-delay: calc(var(--i) * .24s + .3s);
+}
+.is-revealed .hl { background-size: 100% .34em; }
+
+/* Without the reveal script there is nothing to trigger the sweep, so the
+   strokes are simply there from the start. */
+html:not([data-anim="on"]) .hl { background-size: 100% .34em; }
+
+.stmt .counterpoint {
+  max-width: 52ch;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* --------------------------------------------------------------------------
+   BUTTONS AND LINKS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  height: 54px;
+  padding-inline: 26px;
+  border-radius: var(--r);
+  border: 1.5px solid transparent;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background-color .25s ease,
+              border-color .25s ease, box-shadow .25s ease, color .25s ease;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.btn:active { transform: translateY(-1px); }
+
+.btn--solid {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.btn--solid:hover { filter: brightness(1.04); }
+
+
+/* The closing band's primary button matches the home's #cta button. */
+.band--cta .btn--solid {
+  height: 58px;
+  padding-inline: 36px;
+  font-size: 17px;
+  box-shadow: 0 1px 2px rgba(20, 40, 80, .14);
+}
+.band--cta .btn--quiet { height: 58px; padding-inline: 30px; font-size: 17px; }
+
+.btn--quiet {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--navy);
+  font-weight: 600;
+}
+/* Was a jump straight to navy, which read louder than the green button next
+   to it. #c3d6ea is the ring the reached process step already uses. */
+.btn--quiet:hover { border-color: #c3d6ea; }
+.band--cta .btn--quiet { border-color: rgba(255, 255, 255, .34); color: #fff; }
+.band--cta .btn--quiet:hover { border-color: #fff; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* The home underlines its links with a rule that grows from the left. */
+.iw-link {
+  position: relative;
+  text-decoration: none;
+}
+.iw-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.iw-link:hover::after { transform: scaleX(1); }
+
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+}
+.arrow-link .arrow { transition: transform .25s var(--ease); }
+.arrow-link:hover .arrow { transform: translateX(5px); }
+.arrow-link--green { color: var(--green-ink); }
+
+.skip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--faint);
+  text-decoration: none;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--border);
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.skip-link .arrow { transition: transform .25s var(--ease); }
+.skip-link:hover { color: var(--navy); border-color: var(--navy); }
+.skip-link:hover .arrow { transform: translateX(5px); }
+
+/* "Ready to discuss your project?" repeats seven times in the copy. One quiet
+   rail keeps the repetition reading as rhythm instead of clutter. */
+.quote-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--muted);
+}
+.quote-rail a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green-ink);
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.quote-rail a .arrow { transition: transform .25s var(--ease); }
+.quote-rail a:hover .arrow { transform: translateX(5px); }
+
+.icon { flex: none; }
+
+/* The home's 22px tinted circle, used wherever a check appears. */
+.chip {
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: 50%;
+  background: var(--chip-green);
+  color: var(--green-ink);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.chip svg { inline-size: 12px; block-size: 12px; }
+.chip--blue { background: var(--chip-blue); color: var(--navy); }
+.chip--navy { background: var(--chip-navy); color: var(--navy); }
+.chip--danger { background: var(--danger-soft); color: var(--danger-ink); }
+
+/* The counterpoint carries the same ✕ the comparison table uses for the
+   shortcut, so the two arguments read as one vocabulary. */
+.counterpoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  line-height: 1.7;
+  color: var(--muted);
+}
+.counterpoint .chip { margin-top: 4px; }
+
+/* --------------------------------------------------------------------------
+   HERO — same construction as the home's, inverted to a light ground
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* enough height to hold the fold without pushing the next band off it */
+  min-height: min(76vh, 620px);
+  padding-block: clamp(56px, 6vw, 84px);
+  /* No rule at the foot and no flat white: the ground runs into the tint of
+     the band below, which starts on exactly the colour this ends on. */
+  background: linear-gradient(180deg,
+    var(--white) 0%,
+    var(--white) 56%,
+    var(--band-tint) 100%);
+}
+
+/* ---------- the ground: washes of brand colour, each on its own heading ----
+   One element per wash, moved by transform: separate clocks and separate
+   directions, so they drift apart and come back together rather than sliding
+   as one sheet. Pale on purpose — on a light ground anything stronger stops
+   reading as light and starts reading as decoration.
+
+   The layer is the height of the hero and its mask is in percentages, not
+   pixels. It used to be a fixed 1040px box fading from 330 to 600, and against
+   a hero of a different height the washes reached the bottom edge still
+   carrying colour and were cut off square. That cut was the line that showed
+   between the hero and the section under it. They now go out entirely a
+   little before the end, so the hero finishes on the same flat tint the band
+   below begins with. */
+.hero-wash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  block-size: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, #000 0, #000 52%, transparent 88%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 52%, transparent 88%);
+}
+.hero-wash span {
+  position: absolute;
+  left: 50%;
+  will-change: transform;
+}
+/* green: opens top-left over the headline and runs down to the right */
+.hero-wash__g {
+  inline-size: 1015px;
+  block-size: 830px;
+  margin-left: -987px;
+  top: -315px;
+  background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .24), rgba(128, 195, 74, 0) 100%);
+  animation: washG 71s linear infinite;
+}
+/* brand blue: opens top-right and runs the other way */
+.hero-wash__b {
+  inline-size: 1090px;
+  block-size: 910px;
+  margin-left: -75px;
+  top: -295px;
+  background: radial-gradient(closest-side ellipse at center, rgba(18, 102, 181, .21), rgba(18, 102, 181, 0) 100%);
+  animation: washB 97s linear infinite;
+}
+/* sky: the low one, parked under the call. Slowest and widest. */
+.hero-wash__s {
+  inline-size: 1170px;
+  block-size: 860px;
+  margin-left: -545px;
+  top: 200px;
+  background: radial-gradient(closest-side ellipse at center, rgba(46, 140, 214, .21), rgba(46, 140, 214, 0) 100%);
+  animation: washS 127s linear infinite;
+}
+
+/* A sheen crossing the surface, the way light moves over one. It rides inside
+   the wash layer rather than on the hero, so it fades out under the same mask
+   as everything else instead of cutting a diagonal across the seam. */
+.hero-wash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(102deg,
+    rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .34) 50%, rgba(255, 255, 255, 0) 70%);
+  background-repeat: no-repeat;
+  background-size: 260% 100%;
+  animation: heroSheen 47s ease-in-out infinite;
+}
+
+/* Vertical only. The Y values are the original ones, one for one; X is held at
+   zero, so each wash rises and falls in its own place and none of them travels
+   across the one beside it. Four waypoints that come back round read as
+   something wandering; two on an ease would decelerate, stop and reverse,
+   which reads as an animation looping. The periods share no useful factor. */
+@keyframes washG {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, 22%, 0); }
+  50%  { transform: translate3d(0, 6%, 0); }
+  75%  { transform: translate3d(0, -14%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washB {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, 26%, 0); }
+  50%  { transform: translate3d(0, -8%, 0); }
+  75%  { transform: translate3d(0, -24%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washS {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, -18%, 0); }
+  50%  { transform: translate3d(0, 10%, 0); }
+  75%  { transform: translate3d(0, 20%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes heroSheen {
+  0%, 100% { background-position: 124% 0; }
+  50%      { background-position: -24% 0; }
+}
+
+/* One column now that the credentials pane is gone. The washes carry the
+   right-hand side, so the band does not read as half empty. */
+.hero-inner {
+  position: relative;
+  text-align: left;
+}
+.hero-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.hero h1 {
+  /* The floor scales below 400px instead of sitting flat at 36px. Pinned
+     there, "Custom Web Design" no longer fitted the measure on a 320-360px
+     phone and the headline broke to four and five lines. min() leaves every
+     width from 400px up exactly as it was — 9vw only undercuts 36px below
+     that — and the largest size that still holds three lines measured 29.5px
+     at 320 and 33.5px at 360, so 9vw (28.8 and 32.4) clears both.
+
+     That floor is the one place the type scale knowingly misses the Global UX
+     rules, which want a mobile H1 at 30px and up: 9vw gives 28.8px at 320px,
+     and the measured ceiling for three lines at that width is 29.5px. The two
+     cannot both be had. From 334px up the ramp is inside the range. The cap
+     is 64px against the rules' 56px — at the 1180px design width it renders
+     57.6px, and only a display wider than 1333px ever reaches 64. */
+  font-size: clamp(min(9vw, 36px), 4.2vw + 8px, 64px);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  /* a ragged left column reads faster than a wide centred block */
+  max-width: 16ch;
+  text-wrap: balance;
+}
+.hero h1 .accent { color: var(--green-ink); }
+
+.hero-sub {
+  font-size: clamp(16.5px, .55vw + 15px, 18.5px);
+  line-height: 1.65;
+  font-weight: 500;
+  max-width: 52ch;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* The four credentials the pane used to hold, back as one ruled line under
+   the copy. The separator is a pseudo-element rather than a character in the
+   markup, so a screen reader reads four items and not four pipes. */
+.hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--muted);
+}
+.hero-points li + li::before {
+  content: '|';
+  margin-inline: 12px;
+  color: var(--border);
+  font-weight: 500;
+}
+
+.hero .btn-row { margin-top: 10px; }
+
+/* The quiet button is transparent everywhere else, which here would let the
+   weave run straight through it. Only the hero fills it. */
+.hero .btn--quiet { background: var(--white); }
+
+/* Staged entrance, built the way the home stages its own hero: each block
+   lifts in on its own delay, and the green phrase lands last. `backwards`
+   drops the fill afterwards so hover states still win.
+
+   It used to be gated on a flag a script set before first paint. The script
+   now lives in its own deferred file, where the flag would arrive too late to
+   be worth having, so the animation is declared outright. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1,
+  .hero-sub,
+  .hero-points,
+  .hero .btn-row { animation: hero-in .8s var(--ease) backwards; }
+  .hero h1 { animation-delay: .06s; }
+  .hero-sub { animation-delay: .26s; }
+  .hero-points { animation-delay: .40s; }
+  .hero .btn-row { animation-delay: .54s; }
+
+  /* inline-block only where the phrase can't be pushed off the measure */
+  @media (min-width: 640px) {
+    .hero h1 .accent {
+      display: inline-block;
+      animation: hero-in .8s var(--ease) .34s backwards;
+    }
+  }
+}
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+/* --------------------------------------------------------------------------
+   SIGNALS — the ruled list with a checked chip on each row
+   -------------------------------------------------------------------------- */
+.signals { width: 100%; max-width: 46ch; }
+.signals li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background-color .3s var(--ease);
+}
+.signals li:first-child { border-top: 1px solid var(--border); }
+/* One flex item, not two — otherwise the row's 14px gap lands between the
+   sentence and its emphasis instead of a word space. */
+.signal-text { min-width: 0; }
+.signals strong { color: var(--navy); font-weight: 700; }
+.signals .chip { transition: background-color .3s var(--ease); }
+/* A whisper, not a move — five rows all shifting under the cursor was busier
+   than the content deserved. */
+.signals li:hover { background: rgba(128, 195, 74, .07); }
+.signals li:hover .chip { background: #d9ecc4; }
+
+/* The judgements land one after another — the section is about impressions
+   forming in order, not all at once. */
+@media (prefers-reduced-motion: no-preference) {
+  .is-revealed .signals li {
+    animation: signal-in .55s var(--ease) backwards;
+    animation-delay: calc(var(--i) * .09s + .22s);
+  }
+}
+@keyframes signal-in {
+  from { opacity: 0; transform: translateX(-12px); }
+}
+
+
+/* --------------------------------------------------------------------------
+   UNDER THE HOOD
+   The argument sits still on the left while the five capabilities scroll past
+   it on the right — the section reads as one thought instead of a table
+   floating under a paragraph.
+   -------------------------------------------------------------------------- */
+.cms-split {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: start;
+}
+.cms-aside {
+  position: sticky;
+  top: calc(var(--nav-h) + 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.cms-close {
+  margin-top: 6px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 46ch;
+}
+
+.cms-list {
+  width: 100%;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
+  box-shadow: var(--shadow-card);
+}
+.cms-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px clamp(22px, 2.4vw, 30px);
+  border-top: 1px solid var(--border-soft);
+  transition: background-color .35s var(--ease);
+}
+.cms-row:first-child { border-top: 0; }
+.cms-row:hover { background: var(--tint-blue); }
+
+/* The rule wipes in from the left — the same mechanic the home gives its
+   links, rather than a decorative bar that is simply always there. */
+.cms-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  block-size: 2px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s var(--ease);
+}
+.cms-row:hover::after { transform: scaleX(1); }
+
+.cms-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 48px;
+  block-size: 48px;
+  border-radius: 50%;
+  background: var(--tint-blue);
+  color: var(--blue);
+  transition: background-color .35s var(--ease), color .35s var(--ease),
+              transform .35s var(--ease);
+}
+.cms-icon svg { inline-size: 22px; block-size: 22px; }
+.cms-row:hover .cms-icon {
+  background: var(--navy);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.cms-body { display: flex; flex-direction: column; gap: 5px; }
+.cms-body dt {
+  font-size: var(--step-1);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -.01em;
+  transition: transform .35s var(--ease);
+}
+.cms-row:hover .cms-body dt { transform: translateX(4px); }
+.cms-body dd {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   CLOSING CTA
+   -------------------------------------------------------------------------- */
+.final { text-align: center; }
+.final .wrap { max-width: 1340px; }
+.final .stack { align-items: center; }
+.final .lead { margin-inline: auto; }
+
+/* Both closing lines are set to hold on a single line. The sizes are tied to
+   the viewport so the line shrinks to fit rather than breaking; below 560px it
+   is allowed to wrap, because holding one line there would drop the headline
+   under 15px. */
+.final .sec-title,
+.final-flip {
+  max-width: none;
+  white-space: nowrap;
+}
+.final .sec-title { font-size: clamp(19px, 3.62vw, 44px); }
+.final-flip {
+  font-size: clamp(17px, 3.1vw, 28px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.012em;
+  margin-inline: auto;
+  color: rgba(226, 238, 252, .88);
+}
+.final-flip span { color: var(--green); font-weight: 800; }
+
+@media (max-width: 560px) {
+  .final .sec-title,
+  .final-flip { white-space: normal; }
+  .final .sec-title { font-size: var(--step-3); max-width: 23ch; }
+  .final-flip { font-size: clamp(19px, 5vw, 24px); max-width: 25ch; }
+}
+
+/* --------------------------------------------------------------------------
+   REVEAL
+   -------------------------------------------------------------------------- */
+[data-anim="on"] .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-anim="on"] .reveal.is-revealed { opacity: 1; transform: none; }
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .compare { grid-template-columns: 1fr; }
+  .platform-split { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr; }
+  /* the aside has nothing to stay beside once the list drops below it */
+  .cms-split { grid-template-columns: 1fr; }
+  .cms-aside { position: static; }
+  .cms-close { max-width: var(--measure); }
+}
+
+@media (max-width: 767px) {
+  .testi { width: 84vw; max-width: 330px; }
+  .marquee-track { animation-duration: 46s; }
+}
+
+@media (max-width: 640px) {
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-left: 0; border-top: 1px solid var(--border); padding-inline: 0; }
+  .stat:first-child { border-top: 0; }
+  .signature { width: 100%; }
+  /* --rail-x follows --num-size, so the rail re-centres on its own */
+  .flow { --num-size: 46px; }
+  .step-num { font-size: 13px; border-width: 4px; }
+  .step-body { padding: 17px 19px; }
+  .step-body h3 { font-size: 17px; }
+  .btn-row { width: 100%; }
+  .btn-row .btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-anim="on"] .reveal { opacity: 1; transform: none; }
+  .flow-list::after { height: var(--rail-span, calc(100% - 88px)); inline-size: var(--rail-span, 86%); }
+
+  /* The blanket rule above would snap the marquee to its end frame, so stop it
+     outright and hand the row over to the reader as a scrollable strip. */
+  .marquee-track { animation: none !important; transform: none !important; }
+  .marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .work:hover { transform: none; }
+  /* the CMS rows keep their colour change and drop the movement */
+  .cms-row::after { display: none; }
+  .cms-row:hover .cms-icon { transform: none; }
+  .cms-row:hover .cms-body dt { transform: none; }
+  .stat:hover .stat-num { transform: none; }
+  .win-tile:hover { transform: none; }
+  .win-tile:hover .win-icon svg { animation: none; }
+  /* the strokes stay, they just stop being drawn */
+  .hl { background-size: 100% .34em; transition: none; }
+  .step[data-reached="true"] .step-num { animation: none; }
+  .step:hover .step-body { transform: none; }
+  /* the rail is static, so a node parked at its end would read as a stray dot */
+  .steps-node { display: none; }
+}
+
+@media print {
+  .band { padding-block: 24px; }
+  [data-anim="on"] .reveal { opacity: 1; transform: none; }
+}
