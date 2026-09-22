@@ -11,7 +11,7 @@ stylesheet.
 ## Inlining it
 
 The system embeds the font rather than linking it, so a page makes no external
-network request ([decisions/0003](../decisions/0003-font-embedded.md)).
+network request ([decisions/3](../decisions/3-font-embedded.md)).
 `iwc-system.css` ships with a placeholder; before a page goes live:
 
 ```bash

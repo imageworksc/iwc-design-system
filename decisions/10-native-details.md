@@ -1,4 +1,4 @@
-# 0010 · Disclosure is native `<details>`, not a script
+# 10 · Disclosure is native `<details>`, not a script
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)

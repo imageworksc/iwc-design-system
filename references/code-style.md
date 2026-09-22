@@ -7,9 +7,14 @@ system. Match them and a new page's CSS is indistinguishable from the rest.
 
 ## CSS
 
-**No leading zeros.** `.16em`, `.25vw`, `rgba(20, 40, 80, .08)`. Never `0.16em`.
-The system holds 80 fractional values and not one of them carries a leading
-zero.
+**No leading zeros — anywhere.** `.16em`, `.25vw`, `rgba(20, 40, 80, .08)`.
+Never `0.16em`. The system holds 80 fractional values and not one of them
+carries a leading zero.
+
+The rule is not only about CSS. Anything we number is written the same way:
+decision records are `1-`, `9-`, `10-`, never `0001-`. The zero-padded form
+buys lexical sorting in a directory listing and costs readability in every
+heading, link and reference that mentions the thing; we take the readability.
 
 ```css
 letter-spacing: .16em;          /* yes */

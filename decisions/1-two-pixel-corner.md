@@ -1,4 +1,4 @@
-# 0001 · The corner is 2px, everywhere
+# 1 · The corner is 2px, everywhere
 
 **Status** Settled
 **Date** 2026-09-09 (recorded; the decision predates the repos)

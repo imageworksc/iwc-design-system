@@ -1,4 +1,4 @@
-# 0004 · Three files, nothing inline
+# 4 · Three files, nothing inline
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)

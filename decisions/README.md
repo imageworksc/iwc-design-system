@@ -18,23 +18,23 @@ Do not write one for an ordinary rule. `--r: 2px` needs a record; the fact that
 
 | # | Decision | Status |
 | --- | --- | --- |
-| [0001](0001-two-pixel-corner.md) | The corner is 2px, everywhere | Settled |
-| [0002](0002-single-light-theme.md) | One light theme, no dark mode | Settled |
-| [0003](0003-font-embedded.md) | The webfont is embedded as base64 | Settled |
-| [0004](0004-three-files.md) | Three files, nothing inline | Settled |
-| [0005](0005-fix-upstream.md) | The system half is fixed upstream, never in a page | Settled |
-| [0006](0006-h2-cap-44.md) | The H2 cap stays at 44px, over the 42px guideline | Settled, revisit if the `--one` runs are re-measured |
-| [0007](0007-hero-h1-floor.md) | The hero h1 floor stays at 9vw, under the 30px mobile minimum | Settled, conflict noted |
-| [0008](0008-band-deep-repoints-tokens.md) | `.band--deep` re-points tokens instead of getting a dark variant | Settled, known wart |
-| [0009](0009-shell-stops-at-1840.md) | The shell stops growing at 1840px | Settled |
-| [0010](0010-native-details.md) | Disclosure is native `<details>`, not a script | Settled |
+| [1](1-two-pixel-corner.md) | The corner is 2px, everywhere | Settled |
+| [2](2-single-light-theme.md) | One light theme, no dark mode | Settled |
+| [3](3-font-embedded.md) | The webfont is embedded as base64 | Settled |
+| [4](4-three-files.md) | Three files, nothing inline | Settled |
+| [5](5-fix-upstream.md) | The system half is fixed upstream, never in a page | Settled |
+| [6](6-h2-cap-44.md) | The H2 cap stays at 44px, over the 42px guideline | Settled, revisit if the `--one` runs are re-measured |
+| [7](7-hero-h1-floor.md) | The hero h1 floor stays at 9vw, under the 30px mobile minimum | Settled, conflict noted |
+| [8](8-band-deep-repoints-tokens.md) | `.band--deep` re-points tokens instead of getting a dark variant | Settled, known wart |
+| [9](9-shell-stops-at-1840.md) | The shell stops growing at 1840px | Settled |
+| [10](10-native-details.md) | Disclosure is native `<details>`, not a script | Settled |
 
 ## The template
 
 ```markdown
-# NNNN · Title
+# N · Title
 
-**Status** Settled | Open | Superseded by NNNN
+**Status** Settled | Open | Superseded by N
 **Date** YYYY-MM-DD
 **Touches** which files or pages
 

@@ -1,4 +1,4 @@
-# 0008 · `.band--deep` re-points tokens instead of getting a dark variant
+# 8 · `.band--deep` re-points tokens instead of getting a dark variant
 
 **Status** Settled — known wart, see *What breaks*
 **Date** 2026-09-09 (recorded)
@@ -42,5 +42,5 @@ renamed to its opposite.
 
 Introducing that layer is low-risk if the existing names are kept as aliases,
 but it has to be carried to all nine pages in one pass to preserve the
-byte-identical shared half ([0005](0005-fix-upstream.md)). Deferred, not
+byte-identical shared half ([5](5-fix-upstream.md)). Deferred, not
 rejected.

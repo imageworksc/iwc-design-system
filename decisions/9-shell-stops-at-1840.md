@@ -1,4 +1,4 @@
-# 0009 · The shell stops growing at 1840px
+# 9 · The shell stops growing at 1840px
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)

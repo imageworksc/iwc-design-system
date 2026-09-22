@@ -1,4 +1,4 @@
-# 0005 · The system half is fixed upstream, never in a page
+# 5 · The system half is fixed upstream, never in a page
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)

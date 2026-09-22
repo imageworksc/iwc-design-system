@@ -1,4 +1,4 @@
-# 0002 · One light theme, no dark mode
+# 2 · One light theme, no dark mode
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)
@@ -28,7 +28,7 @@ seconds on, we judged the consistency worth more.
 ## What breaks if this changes
 
 Everything, twice. The colour tokens are semantic enough to re-point (see
-[0008](0008-band-deep-repoints-tokens.md)), but every contrast pair would need
+[8](8-band-deep-repoints-tokens.md)), but every contrast pair would need
 re-checking, the hero washes are tuned for a light ground and would need
 rebuilding, and the card recipe's white-to-near-white gradient has no dark
 equivalent that reads the same.

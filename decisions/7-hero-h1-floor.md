@@ -1,4 +1,4 @@
-# 0007 · The hero h1 floor stays at 9vw, under the 30px mobile minimum
+# 7 · The hero h1 floor stays at 9vw, under the 30px mobile minimum
 
 **Status** Settled — genuine conflict, recorded rather than resolved
 **Date** 2026-09-22

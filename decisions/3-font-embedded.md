@@ -1,4 +1,4 @@
-# 0003 · The webfont is embedded as base64
+# 3 · The webfont is embedded as base64
 
 **Status** Settled
 **Date** 2026-09-09 (recorded)
