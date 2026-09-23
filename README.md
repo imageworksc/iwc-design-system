@@ -7,7 +7,48 @@ It is the rules, the reference, the reasoning behind both, and the CSS itself.
 No framework, no build step, no dependencies: the pages it describes are three
 static files that open in a browser.
 
-**→ [INSTALL.md](INSTALL.md)** — get it working in about thirty seconds.
+---
+
+## Start here — download `CLAUDE.md`
+
+**[`CLAUDE.md`](CLAUDE.md) is the file to download.** Put it where your AI
+assistant reads its always-on rules and every page it builds from then on
+follows the system — the tokens, the bands, the type scale, the accessibility
+floor, the scope discipline, all of it.
+
+```bash
+curl -O https://raw.githubusercontent.com/imageworksc/iwc-design-system/main/CLAUDE.md
+```
+
+Or open [CLAUDE.md](CLAUDE.md) here in GitHub and use the **download raw file**
+button at the top right of the file view.
+
+### Where to put it
+
+| Tool | Put it at | What happens |
+| --- | --- | --- |
+| **Claude Code** | `CLAUDE.md` in the page repo's root | Loads automatically at the start of every session in that repo. Nothing to invoke, nothing to remember. |
+| **Claude.ai / Claude desktop** | Project → **Set project instructions** → paste the whole file | Read on every message in that project. On a Team plan, share the project so everyone works from one copy instead of their own. |
+| **Cursor** | `.cursorrules` | |
+| **Codex** | `AGENTS.md` | |
+| **Copilot** | `.github/copilot-instructions.md` | |
+
+### Then just ask for the page
+
+> Build the IWC subpage in the attached copy.
+
+The rules are already loaded. Nobody has to repeat them, paste them, or
+remember which ones matter for this particular page.
+
+**That one file is enough to start.** Everything else here is what you add when
+you want more: [`iwc-system.css`](iwc-system.css) is the actual stylesheet,
+[`references/`](references/) is the detail behind the rules,
+[`decisions/`](decisions/) is why they are what they are, and the skill turns
+the build procedure into `/iwc-subpage`.
+
+**→ [INSTALL.md](INSTALL.md)** covers the fuller setups — the whole kit in a
+page repo, `@`-imports so one clone updates every repo, and machine-wide
+install.
 
 ---
 

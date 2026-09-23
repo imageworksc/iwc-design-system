@@ -9,6 +9,34 @@ place.
 
 ---
 
+## The fastest way — one file
+
+**Download [`CLAUDE.md`](CLAUDE.md).** It is the operating rules for every page,
+readable on its own, and it is enough to start:
+
+```bash
+curl -O https://raw.githubusercontent.com/imageworksc/iwc-design-system/main/CLAUDE.md
+```
+
+Or open it in GitHub and use the **download raw file** button at the top right
+of the file view.
+
+| Tool | Put it at |
+| --- | --- |
+| **Claude Code** | `CLAUDE.md` in the repo root — loads automatically, nothing to invoke |
+| **Claude.ai / Claude desktop** | Project → **Set project instructions** → paste the whole file |
+| **Cursor** | `.cursorrules` |
+| **Codex** | `AGENTS.md` |
+| **Copilot** | `.github/copilot-instructions.md` |
+
+Then ask for the page — *"Build the IWC subpage in the attached copy"* — and the
+rules are already loaded.
+
+Everything below is for when you want the rest: the stylesheet, the reference,
+the decision records and the skill.
+
+---
+
 ## Claude Code — 30 seconds
 
 ```bash

@@ -14,6 +14,15 @@ Everything else is looked up as needed:
   truth. Where it and a document disagree, the stylesheet is right
 - **[migration.md](migration.md)** — what the pages still owe the system
 
+> **Using this file on its own?** That is what it is for. Put it where your
+> assistant reads always-on rules — `CLAUDE.md` in a page repo's root for
+> Claude Code, project instructions on Claude.ai, `.cursorrules`, `AGENTS.md`,
+> `.github/copilot-instructions.md` — and every page built in that project
+> follows the system without anyone having to repeat it.
+>
+> The stylesheet, the reference and the decision records live alongside it at
+> [github.com/imageworksc/iwc-design-system](https://github.com/imageworksc/iwc-design-system).
+
 ---
 
 ## What we build
